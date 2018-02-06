@@ -3,7 +3,7 @@ AngularJS, ES6 and Webpack 2 starter template
 
 ## What it Contains
 
-1. **src** directory for reactjs project with mulitple pages and components
+1. **src** directory for AngularJS project with mulitple pages
 2. **Less** for Styling/CSS
 3. Webpack configuration for development with dev-server 
 4. Webpack configuration for production 

@@ -7,9 +7,11 @@ const extractLess = new ExtractTextPlugin({
     filename: "css/styles.css"
 });
 
+const APP_DIR = path.resolve(__dirname, 'src/');
+
 module.exports = {
     entry: {
-        app: './src/app.module.js'
+        app: `${APP_DIR}/app.module.js`
     },
     output: {
         filename: '[name].bundle.js',
@@ -19,8 +21,9 @@ module.exports = {
         rules: [
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
                 loader: 'babel-loader',
+                include: APP_DIR,
+                exclude: /node_modules/,
             },
             {
                 test: /\.less$/,
