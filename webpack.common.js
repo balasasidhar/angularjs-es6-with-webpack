@@ -1,59 +1,51 @@
-const path = require('path');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-
-const extractLess = new ExtractTextPlugin({
-    filename: "css/styles.css"
-});
-
-const APP_DIR = path.resolve(__dirname, 'src/');
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 
 module.exports = {
-    entry: {
-        app: `${APP_DIR}/app.module.js`
-    },
-    output: {
-        filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'dist')
-    },
-    module: {
-        rules: [
-            {
-                test: /\.js$/,
-                loader: 'babel-loader',
-                include: APP_DIR,
-                exclude: /node_modules/,
-            },
-            {
-                test: /\.less$/,
-                use: extractLess.extract({
-                    use: [{
-                        loader: "css-loader"
-                    }, {
-                        loader: "less-loader"
-                    }],
-                    // use style-loader in development
-                    fallback: "style-loader"
-                })
-            },
-            {
-                test: /\.html$/,
-                use: [{
-                    loader: 'html-loader',
-                    options: {
-                        minimize: true
-                    }
-                }]
-            },
-        ]
-    },
-    plugins: [
-        new CleanWebpackPlugin(['dist']),
-        new HtmlWebpackPlugin({
-            title: 'P&G',
-            template: './src/index.html'
-        }),
-        extractLess
+  entry: path.resolve(__dirname, "src", "index.js"),
+  output: {
+    filename: "[name].[hash].js",
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/"
+  },
+  module: {
+    rules: [
+      {
+        test: /\.html$/i,
+        use: ["html-loader"]
+      },
+      {
+        test: /\.js$/i,
+        include: path.resolve(__dirname, "src"),
+        loader: "babel-loader"
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/i,
+        use: ["file-loader"]
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        use: ["file-loader"]
+      },
+      {
+        test: /\.bundle\.js$/,
+        loader: "bundle-loader",
+        options: {
+          lazy: true,
+          name: "[name]"
+        }
+      }
     ]
+  },
+  plugins: [
+    new ProgressBarPlugin(),
+    new CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      title: "AngularJS 1.x with Webpack 4",
+      filename: "index.html",
+      template: path.resolve(__dirname, "src", "index.html")
+    })
+  ]
 };

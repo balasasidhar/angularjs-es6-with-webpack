@@ -1,9 +1,9 @@
 import angular from 'angular';
-import uirouter from 'angular-ui-router';
+import uiRouter from "@uirouter/angularjs";
 import routes from './home.route';
 import HomeController from './home.controller';
 
-const homeComponent = angular.module('MyApp.home', [uirouter])
+const homeComponent = angular.module('MyApp.home', [uiRouter])
     .config(routes)
     .controller('HomeController', HomeController)
     .name;
