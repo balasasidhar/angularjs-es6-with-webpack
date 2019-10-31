@@ -29,5 +29,5 @@ AngularJS, ES6 and Webpack 2 starter template
 - [AngularJS](https://angularjs.org/)
 - [ES6](https://es6.io/)
 - [Babel](https://babeljs.io/)
-- [SASS](http://lesscss.org/)
+- [SASS](https://sass-lang.com/)
 - [Webpack](https://webpack.js.org/)
