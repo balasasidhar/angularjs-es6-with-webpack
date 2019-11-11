@@ -1,11 +1,10 @@
 import angular from "angular";
-import uiRouter from "@uirouter/angularjs";
-import routes from "./about.route";
-import AboutController from "./about.controller";
+import AboutConfig from "./about.config";
+import AboutCtrl from "./about.controller";
 
 const aboutComponent = angular
-  .module("MyApp.about", [uiRouter])
-  .config(routes)
-  .controller("AboutController", AboutController).name;
+  .module("about", [])
+  .config(AboutConfig)
+  .controller("AboutCtrl", AboutCtrl);
 
 export default aboutComponent;
